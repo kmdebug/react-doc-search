@@ -6,18 +6,12 @@ It features inline text search with match highlighting and navigation capabiliti
 
 ## Table of Contents
 
-1. [Demonstration](#demonstration)
-2. [Features](#features)
-3. [Prerequisites](#prerequisites)
-4. [Getting Started](#getting-started)
-5. [Technologies](#technologies)
+1. [Features](#features)
+2. [Demonstration](#demonstration)
+3. [Technologies](#technologies)
+4. [Prerequisites](#prerequisites)
+5. [Getting Started](#getting-started)
 6. [Contributing](#contributing)
-
-## Demonstration
-
-<p><img align="center" src="https://github.com/kmdebug/react-doc-search/blob/master/demo.gif" alt="react document search functionality" /></p>
-
-[View Live Demo](https://react-doc-search.vercel.app/)
 
 ## Features
 
@@ -28,11 +22,22 @@ It features inline text search with match highlighting and navigation capabiliti
 - **Customizable**: Easily adapt styles and behavior to your application
 - **Lightweight**: Built with React, optimized for performance
 
+## Demonstration
+
+![React Document Search Demo](https://github.com/kmdebug/react-doc-search/blob/master/demo.gif)
+
+[View Live Demo](https://react-doc-search.vercel.app/)
+
+## Technologies
+
+- React (Vite)
+- TailwindCSS
+
 ## Prerequisites
 
 Before getting started, it is required to download & install the following:
 
-- [Nodejs](https://nodejs.org/en/download/) LTS or current version works fine. It must be above version 14.
+- [Node.js](https://nodejs.org/en/download/) 14+ (Recommended: Latest LTS version)
 
 ## Getting Started
 
