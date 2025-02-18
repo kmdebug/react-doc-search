@@ -3,6 +3,8 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import Document from './components/Document';
 import Button from './components/Button';
 
+import useMatchNavigation from './hooks/useMatchNavigation';
+
 const App: React.FC = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchText, setSearchText] = useState('');
@@ -11,6 +13,8 @@ const App: React.FC = (): JSX.Element => {
   const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
 
   const searchInputRef = useRef<null | HTMLInputElement>(null);
+
+  const { currentIndex, next, prev } = useMatchNavigation(matches);
 
   const content = 'hello, world, hello, everyone and hello to all.';
 
@@ -74,7 +78,7 @@ const App: React.FC = (): JSX.Element => {
         <span
           key={index}
           className={`${
-            Math.floor(index / 2) === currentMatchIndex
+            Math.floor(index / 2) === currentIndex
               ? 'bg-[#6DD58C]'
               : 'bg-[#C4EED0]'
           }`}
@@ -85,18 +89,7 @@ const App: React.FC = (): JSX.Element => {
         part
       )
     );
-  }, [content, debounceSearchText, currentMatchIndex]);
-
-  // Navigation handlers
-  const handleNext = (): void => {
-    setCurrentMatchIndex((prev) => (prev + 1) % matches.length);
-  };
-
-  const handlePrevious = (): void => {
-    setCurrentMatchIndex(
-      (prev) => (prev - 1 + matches.length) % matches.length
-    );
-  };
+  }, [content, debounceSearchText, currentIndex]);
 
   if (!isOpen) {
     return <Document>{content}</Document>;
@@ -119,13 +112,13 @@ const App: React.FC = (): JSX.Element => {
         <div className="flex items-center gap-2">
           <span className="text-sm text-gray-600">
             {matches.length > 0
-              ? `${currentMatchIndex + 1} of ${matches.length}`
+              ? `${currentIndex + 1} of ${matches.length}`
               : ''}
           </span>
 
           <Button
             className="p-1 text-gray-600 hover:bg-gray-100 rounded disabled:opacity-50 disabled:hover:bg-transparent"
-            onClick={handlePrevious}
+            onClick={prev}
             disabled={!matches.length}
             title="Previous match"
           >
@@ -144,7 +137,7 @@ const App: React.FC = (): JSX.Element => {
 
           <Button
             className="p-1 text-gray-600 hover:bg-gray-100 rounded disabled:opacity-50 disabled:hover:bg-transparent"
-            onClick={handleNext}
+            onClick={next}
             disabled={!matches.length}
             title="Previous match"
           >
