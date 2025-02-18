@@ -3,8 +3,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/kmdebug/react-doc-search)
 ![GitHub language count](https://img.shields.io/github/languages/count/kmdebug/react-doc-search)
 [![GitHub issues](https://img.shields.io/github/issues/kmdebug/react-doc-search)](https://github.com/kmdebug/react-doc-search/issues)
-![GitHub deployments](https://img.shields.io/github/deployments/kmdebug/react-doc-search/github-pages)
-![GitHub License](https://img.shields.io/github/license/kmdebug/react-doc-search)
+[![GitHub license](https://img.shields.io/github/license/kmdebug/react-doc-search)](https://github.com/kmdebug/react-doc-search/blob/master/LICENSE)
 
 React Docs Search is a lightweight, standalone text search utility that emulates the functionality of "Ctrl+F" in applications like Google Docs.
 
