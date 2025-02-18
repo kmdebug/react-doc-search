@@ -10,11 +10,11 @@ const App: React.FC = (): JSX.Element => {
   const [searchText, setSearchText] = useState('');
   const [debounceSearchText, setDebounceSearchText] = useState('');
   const [matches, setMatches] = useState<RegExpExecArray[]>([]);
-  const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
 
   const searchInputRef = useRef<null | HTMLInputElement>(null);
 
-  const { currentIndex, next, prev } = useMatchNavigation(matches);
+  const { setCurrentIndex, currentIndex, next, prev } =
+    useMatchNavigation(matches);
 
   const content = 'hello, world, hello, everyone and hello to all.';
 
@@ -53,7 +53,7 @@ const App: React.FC = (): JSX.Element => {
   useEffect(() => {
     if (!debounceSearchText) {
       setMatches([]);
-      setCurrentMatchIndex(0);
+      setCurrentIndex(0);
       return;
     }
 
@@ -62,11 +62,11 @@ const App: React.FC = (): JSX.Element => {
       const found = Array.from(content.matchAll(regex));
 
       setMatches(found);
-      setCurrentMatchIndex((prev) => Math.min(prev, found.length - 1));
+      setCurrentIndex((prev) => Math.min(prev, found.length - 1));
     } catch {
       setMatches([]);
     }
-  }, [debounceSearchText, content]);
+  }, [debounceSearchText, content, setCurrentIndex]);
 
   // Highlight text with memoisation
   const highlightedContent = useMemo(() => {

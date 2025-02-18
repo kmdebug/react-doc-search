@@ -11,7 +11,7 @@ const useMatchNavigation = (matches: RegExpExecArray[]) => {
   const prev = () =>
     setCurrentIndex((prev) => (prev - 1 + matches.length) % matches.length);
 
-  return { currentIndex, next, prev };
+  return { setCurrentIndex, currentIndex, next, prev };
 };
 
 export default useMatchNavigation;
