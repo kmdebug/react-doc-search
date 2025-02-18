@@ -14,7 +14,7 @@ It features inline text search with match highlighting and navigation capabiliti
 
 ## Demonstration
 
-Demo
+<p><img align="center" src="https://github.com/kmdebug/react-doc-search/blob/master/demo.mp4" alt="react document search functionality" width="" height="" /></p>
 
 ## License
 
