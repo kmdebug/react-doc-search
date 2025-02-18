@@ -46,8 +46,8 @@ const App: React.FC = (): JSX.Element => {
               type="text"
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
-              className="text-black pl-8 pr-2 py-1 border border-gray-200 rounded-md w-64 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Search in document..."
+              className="text-black px-2 py-1 border border-gray-200 rounded-md w-36 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-sm"
+              placeholder="Find in document"
             />
           </div>
 
