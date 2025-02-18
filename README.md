@@ -17,6 +17,17 @@ It features inline text search with match highlighting and navigation capabiliti
 
 <p><img align="center" src="https://github.com/kmdebug/react-doc-search/blob/master/demo.gif" alt="react document search functionality" /></p>
 
+[View Live Demo](https://react-doc-search.vercel.app/)
+
+## Features
+
+- **Real-Time Search**: Search text dynamically as you type
+- **Match Highlighting**: Visually highlight all matching results
+- **Navigation**: Navigate through matches using next/previous controls
+- **Keyboard Friendly**: Seamless keyboard integration (Ctrl+F, Enter, Escape)
+- **Customizable**: Easily adapt styles and behavior to your application
+- **Lightweight**: Built with React, optimized for performance
+
 ## Prerequisites
 
 Before getting started, it is required to download & install the following:
