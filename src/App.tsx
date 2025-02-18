@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 
 import Document from './components/Document';
+import Button from './components/Button';
 
 const App: React.FC = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +14,7 @@ const App: React.FC = (): JSX.Element => {
 
   const content = 'hello, world, hello, everyone and hello to all.';
 
+  // Debounce search input
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setDebounceSearchText(searchText);
@@ -21,6 +23,7 @@ const App: React.FC = (): JSX.Element => {
     return () => clearTimeout(timeoutId);
   }, [searchText]);
 
+  // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.key === 'f') {
@@ -37,12 +40,12 @@ const App: React.FC = (): JSX.Element => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  // Focus search input when opened
   useEffect(() => {
     if (isOpen) searchInputRef.current?.focus();
   }, [isOpen]);
 
   // Calculate matches
-
   useEffect(() => {
     if (!debounceSearchText) {
       setMatches([]);
@@ -62,7 +65,6 @@ const App: React.FC = (): JSX.Element => {
   }, [debounceSearchText, content]);
 
   // Highlight text with memoisation
-
   const highlightedContent = useMemo(() => {
     if (!debounceSearchText) return content;
 
@@ -121,10 +123,10 @@ const App: React.FC = (): JSX.Element => {
               : ''}
           </span>
 
-          <button
+          <Button
+            className="p-1 text-gray-600 hover:bg-gray-100 rounded disabled:opacity-50 disabled:hover:bg-transparent"
             onClick={handlePrevious}
             disabled={!matches.length}
-            className="p-1 text-gray-600 hover:bg-gray-100 rounded disabled:opacity-50"
             title="Previous match"
           >
             <svg
@@ -138,13 +140,13 @@ const App: React.FC = (): JSX.Element => {
               <path fill="none" d="M0 0h24v24H0z"></path>
               <path d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path>
             </svg>
-          </button>
+          </Button>
 
-          <button
+          <Button
+            className="p-1 text-gray-600 hover:bg-gray-100 rounded disabled:opacity-50 disabled:hover:bg-transparent"
             onClick={handleNext}
             disabled={!matches.length}
-            className="p-1 text-gray-600 hover:bg-gray-100 rounded disabled:opacity-50"
-            title="Next match"
+            title="Previous match"
           >
             <svg
               className="w-4 h-4"
@@ -157,7 +159,7 @@ const App: React.FC = (): JSX.Element => {
               <path fill="none" d="M0 0h24v24H0V0z"></path>
               <path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path>
             </svg>
-          </button>
+          </Button>
 
           <button
             onClick={() => setIsOpen(false)}
