@@ -96,41 +96,17 @@ const App: React.FC = (): JSX.Element => {
 
   if (!isOpen) {
     return (
-      <div
-        className="bg-[#f9fbfd]"
-        style={{
-          padding: '11px 0px 0px',
-        }}
-      >
-        <div
-          className="bg-white w-[804px] h-[1201px] border mx-auto p-[68px] text-[15px] font-sans leading-normal font-normal"
-          style={{
-            boxShadow:
-              'rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.20) 0px 0px 0px 0.7px',
-          }}
-        >
-          <div className="sp-4 text-black">
-            <p className="whitespace-pre-wrap">{content}</p>
-          </div>{' '}
-        </div>{' '}
+      <div className="bg-[#f9fbfd] pt-[11px] pb-0">
+        <div className="bg-white w-[804px] h-[1201px] border mx-auto p-[68px] text-[15px] font-sans leading-normal font-normal shadow-[0px_1px_3px_0px_rgba(0,_0,_0,_0.02),_0px_0px_0px_0.7px_rgba(27,_31,_35,_0.20)]">
+          <p className="whitespace-pre-wrap text-black">{content}</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div
-      className="bg-[#f9fbfd]"
-      style={{
-        padding: '11px 0px 0px',
-      }}
-    >
-      <div
-        className="bg-white w-[804px] h-[1201px] border mx-auto p-[68px] text-[15px] font-sans leading-normal font-normal"
-        style={{
-          boxShadow:
-            'rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.20) 0px 0px 0px 0.7px',
-        }}
-      >
+    <div className="bg-[#f9fbfd] pt-[11px] pb-0">
+      <div className="bg-white w-[804px] h-[1201px] border mx-auto p-[68px] text-[15px] font-sans leading-normal font-normal shadow-[0px_1px_3px_0px_rgba(0,_0,_0,_0.02),_0px_0px_0px_0.7px_rgba(27,_31,_35,_0.20)]">
         <div className="fixed top-4 right-4 bg-white shadow-lg rounded-lg p-2 flex items-center gap-2 border border-gray-200">
           <div className="relative flex items-center">
             <input
