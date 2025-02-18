@@ -4,7 +4,7 @@ type Props = {
   children: React.ReactNode;
   className?: string;
   onClick?: () => void;
-  disabled: boolean;
+  disabled?: boolean;
   title: string;
 };
 const Button: React.FC<Props> = ({
