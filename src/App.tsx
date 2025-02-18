@@ -3,6 +3,9 @@ import { useState, useEffect, useRef } from 'react';
 const App: React.FC = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchText, setSearchText] = useState('');
+  const [matches, setMatches] = useState<RegExpExecArray[]>([]);
+  const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
+
   const searchInputRef = useRef<null | HTMLInputElement>(null);
 
   useEffect(() => {
@@ -24,6 +27,17 @@ const App: React.FC = (): JSX.Element => {
 
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
+
+  // Navigation handlers
+  const handleNext = (): void => {
+    setCurrentMatchIndex((prev) => (prev + 1) % matches.length);
+  };
+
+  const handlePrevious = (): void => {
+    setCurrentMatchIndex(
+      (prev) => (prev - 1 + matches.length) % matches.length
+    );
+  };
 
   return (
     <div
@@ -52,9 +66,15 @@ const App: React.FC = (): JSX.Element => {
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-600">0</span>
+            <span className="text-sm text-gray-600">
+              {matches.length > 0
+                ? `${currentMatchIndex + 1} of ${matches.length}`
+                : ''}
+            </span>
 
             <button
+              onClick={handlePrevious}
+              disabled={!matches.length}
               className="p-1 text-gray-600 hover:bg-gray-100 rounded disabled:opacity-50"
               title="Previous match"
             >
@@ -72,6 +92,8 @@ const App: React.FC = (): JSX.Element => {
             </button>
 
             <button
+              onClick={handleNext}
+              disabled={!matches.length}
               className="p-1 text-gray-600 hover:bg-gray-100 rounded disabled:opacity-50"
               title="Next match"
             >
