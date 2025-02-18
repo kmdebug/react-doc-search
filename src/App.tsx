@@ -1,12 +1,23 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 
 const App: React.FC = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchText, setSearchText] = useState('');
+  const [debounceSearchText, setDebounceSearchText] = useState('');
   const [matches, setMatches] = useState<RegExpExecArray[]>([]);
   const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
 
   const searchInputRef = useRef<null | HTMLInputElement>(null);
+
+  const content = 'hello, world, hello, everyone and hello to all.';
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setDebounceSearchText(searchText);
+    }, 100);
+
+    return () => clearTimeout(timeoutId);
+  }, [searchText]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -14,10 +25,6 @@ const App: React.FC = (): JSX.Element => {
         e.preventDefault();
 
         setIsOpen(true);
-
-        setTimeout(() => {
-          searchInputRef.current?.focus();
-        }, 100);
       } else if (e.key === 'Escape') {
         setIsOpen(false);
       }
@@ -27,6 +34,54 @@ const App: React.FC = (): JSX.Element => {
 
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
+
+  useEffect(() => {
+    if (isOpen) searchInputRef.current?.focus();
+  }, [isOpen]);
+
+  // Calculate matches
+
+  useEffect(() => {
+    if (!debounceSearchText) {
+      setMatches([]);
+      setCurrentMatchIndex(0);
+      return;
+    }
+
+    try {
+      const regex = new RegExp(debounceSearchText, 'gi');
+      const found = Array.from(content.matchAll(regex));
+
+      setMatches(found);
+      setCurrentMatchIndex((prev) => Math.min(prev, found.length - 1));
+    } catch {
+      setMatches([]);
+    }
+  }, [debounceSearchText, content]);
+
+  // Highlight text with memoisation
+
+  const highlightedContent = useMemo(() => {
+    if (!debounceSearchText) return content;
+
+    const regex = new RegExp(`(${debounceSearchText})`, 'gi');
+    return content.split(regex).map((part, index) =>
+      part.toLowerCase() === debounceSearchText.toLowerCase() ? (
+        <span
+          key={index}
+          className={`${
+            Math.floor(index / 2) === currentMatchIndex
+              ? 'bg-[#6DD58C]'
+              : 'bg-[#C4EED0]'
+          }`}
+        >
+          {part}
+        </span>
+      ) : (
+        part
+      )
+    );
+  }, [content, debounceSearchText, currentMatchIndex]);
 
   // Navigation handlers
   const handleNext = (): void => {
@@ -38,6 +93,29 @@ const App: React.FC = (): JSX.Element => {
       (prev) => (prev - 1 + matches.length) % matches.length
     );
   };
+
+  if (!isOpen) {
+    return (
+      <div
+        className="bg-[#f9fbfd]"
+        style={{
+          padding: '11px 0px 0px',
+        }}
+      >
+        <div
+          className="bg-white w-[804px] h-[1201px] border mx-auto p-[68px] text-[15px] font-sans leading-normal font-normal"
+          style={{
+            boxShadow:
+              'rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.20) 0px 0px 0px 0.7px',
+          }}
+        >
+          <div className="sp-4 text-black">
+            <p className="whitespace-pre-wrap">{content}</p>
+          </div>{' '}
+        </div>{' '}
+      </div>
+    );
+  }
 
   return (
     <div
@@ -129,6 +207,7 @@ const App: React.FC = (): JSX.Element => {
             </button>
           </div>
         </div>
+        <p className="whitespace-pre-wrap text-black">{highlightedContent}</p>
       </div>
     </div>
   );
