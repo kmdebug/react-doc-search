@@ -115,6 +115,15 @@ git push origin BRANCH_NAME
 
 Submit a `Pull Request`
 
+## Contact
+
+For feedback or questions, feel free to reach out:
+
+<p align="left"> 
+ <a href="https://github.com/kmdebug" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/github-dark.svg" width="20" height="20" /></a> •
+ <a href="https://www.linkedin.com/in/kaissar-mouelhi/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/linkedin.svg" width="20" height="20" /></a>
+</p>
+
 ## License
 
 This project is licensed under the [MIT](https://choosealicense.com/licenses/mit/) license. <br/> Copyright © 2025, Kaissar Mouelhi
